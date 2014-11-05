@@ -1,0 +1,26 @@
+.scratch-card {
+  position: relative;
+}
+.scratch-card .prize,
+.scratch-card canvas {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.scratch-card .prize{
+  z-index: 10;
+  display: block;
+  border: 0 none;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: center center no-repeat;
+  background-size: 100%;
+  overflow: hidden;
+}
+.scratch-card .prize img{
+  width: 100%;
+}
+.scratch-card canvas {
+  z-index: 20;
+}

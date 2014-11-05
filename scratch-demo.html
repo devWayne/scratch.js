@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Scratch.JS</title>
+</head>
+
+<body>
+    <div>
+        <blockquote>
+            <div class="scratch-bg">
+                <div id="scratch-demo"></div>
+            </div>
+            <div id="scratch-result" class="hide">
+                <span></span>
+                <button class="btn btn-primary btn-sm">再刮一次</button>
+            </div>
+        </blockquote>
+    </div>
+
+    <script src="http://code.jquery.com/jquery-2.1.1.js"></script>
+    <script src="scratch-obj.js"></script>
+    <script>
+        var prizeList = ['0', '5', '4880', '0', '5', '0', '0', '5', '0'],
+            prizeResult,
+            //初始化一个刮奖Demo
+            scratchDemo = new Scratch({
+                //刮奖DOM容器
+                container: document.getElementById('scratch-demo'),
+                //刮奖区域宽度
+                width: 280,
+                //刮奖区域高度
+                height: 140,
+                //奖品图片路径
+                imgPath: 'css/img/',
+                //刮奖封面使用颜色填充
+                scratchCoverColor: '#e6e6e6',
+                //刮奖结果增加CSS样式
+                prizeClass: 'prize-result',
+                //刮奖准备就绪响应事件
+                onScratchReady: function() {
+                    prizeResult = Math.floor(Math.random() * (prizeList.length - 1));
+                    prizeResult = prizeList[prizeResult];
+                    //显示图片结果
+                    scratchDemo.setPrizeImage("get-" + prizeResult + ".png");
+
+                    //显示文字结果
+                    //scratchDemo.setPrizeText(prizeResult);
+                },
+                //奖项被刮开的时候响应事件
+                onScratchDiscovered: function() {
+                    //停止卡片可刮奖状态
+                    //scratchDemo.touchState = false;
+                    alert(prizeResult == 0 ? "很遗憾，再试试手气吧！" : "恭喜你，获得" + prizeResult + "元红包！");
+                }
+            });
+
+         //刮奖就绪
+        scratchDemo.trigger('scratchReady');
+         //开启刮奖
+        scratchDemo.trigger('scratchStart');
+    </script>
+</body>
+
+</html>
